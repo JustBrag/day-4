@@ -1,0 +1,189 @@
+nmap -v (layer 4)
+
+
+TASK 1: 
+
+1. to hack someone you have to be in the same wifi withsomeone you want to hack. "Evil twin attack". 
+2. Use the 7 OSI layer to attack/steal info to others.    
+
+
+Use seven OSI layer:
+
+
+Physical Layer: wifi: be on the same wifi with someone you want to hack
+bits run in this layer 
+V-voltage
+I-Interface
+T- Transmission
+
+There 3 ways to send bits: 
+fiber-optics
+wired
+wireless
+
+
+
+netsh wlan show profile name="3F-Rivan" key=clear                           
+Data-link Layer: Always use randomize MAC addres. 
+
+nmap -sP 10.3.3.0/24               
+
+Network Layer:  ping to get their IP address.
+PACKET
+
+Transport Layer: You need to get the ports.
+try in windows: netstat -ano 
+*it will display that windows pc always listen and ports are always open
+*highest port is always the hacker
+*MITRE ATT8CK ALWAYS OPEN PORTS FOR ATTACKING.
+ports 135 and 445 are the ports you need to infiltrate someone.
+SEGMENT:source port and dest. port
+
+netstat -n -p tcp | findstr 445
+
+Sa-sa-e
+syn-ack-syn-ack-establish (how an attack happens: 3 way handshake: 
+                           Hacker        Victim
+                           ---------SYN------>
+                           <--------ACK-------
+                           ---------SYN/ACK--->
+                           <--------EST--------
+
+SESSION LAYER:
+*its where we attempt to hack or grab infos
+net use (ping of the device you want to infiltrate)
+net use \\10.3.3.162\ipc$
+
+
+
+IN WIRESHARK
+*you can access informations in wireshark
+*
+tcp.flags.syn == 1 && tcp.flags.ack ==0
+
+nmap -v www.dpwh.gov.ph in cmd (send syn to get info from someone)
+nmap -v 10.3.3.162 (to know the open ports of someone you want to hack)
+nmap -v (dns or website you want to hack) ex: www.bicol-u.edu.ph
+
+
+
+PRESENTATION LAYER:
+*need to acces:
+jpg
+
+
+APPLICATION LAYER: windows explorer app 
+
+net use x: /delete 
+net use x: \\10.3.3.162\c$
+you can access their folder in their folder this pc> c$>Users>Administrator>Videos>(folder he created)
+bytes run in this layer
+DATA
+
+Hacker: higher port is the hacker, low port is the victim
+
+if you buy vpn, they cant see the ports whenever the victim is trying to see them. 
+
+DAY 4
+to configure firewall
+file in vm ware>click csr1000v>ciscofirewall name> choose small>cisco-fw>pass>pass
+
+SOC L3/L4: http:208.8.8.133/otrs/index.pl
+admin C1sc0123
+
+in firewall we need 3 connections/interface:
+outside
+inside 
+DMC
+!1st 
+CONFIG T
+no logging console
+Int Gi 2
+no shut
+ip add 192.168.102.11 255.255.255.0
+!@telnet use secureCRT: telnet 192.168.108.5
+!in SEcureCRT, Paste This:
+config t
+IP ROUTE 0.0.0.0  0.0.0.0 208.8.8.2
+ip name-server 8.8.8.8 1.1.1.1
+ip domain lookup
+int gi 1
+no shut
+ip add 208.8.8.11 255.255.255.0
+int gi 3
+no shut
+ip add 192.168.103.11 255.255.255.0
+line vty 0 14
+ transport input all
+ exec-timeout 0 0
+do sh ip int brief
+
+
+u can access the accounts in wireshark 
+
+
+TASK 3 
+CREATING YOUR OWN PUBLIC KEY
+
+conf t
+ip domain name keykeymo.com
+crypto key generate rsa modulus 1024
+end
+
+sh ip ssh
+
+
+ip access-group NOPORN in - means no port site can access going in (int g1)
+**FIREWALLS BLOCKS SOURCE IPs 
+**ACL has outside and inside function like NAT
+
+
+customer>customer user>services
+
+TASK 4: CREATE A PACKET FILTER FIREWALL:
+EX1: CREATE A FIREWALL POLICY THAT WILL ALLOW: 
+bet10.com will open 22,23,443
+bet11.com will open  80, 443, 5060,1720,2000
+
+formula/command: PROTOCOL HACKER VICTIM PORT{if}
+
+**study about packet filter firewall
+
+TASK5: HOW TO START A CAREER IN NETWORK CYBERSECURITY FOR FREE!!
+intentionally hackable websites
+1. Hack The Box
+2. CTFlearn
+3. bWAPP
+4. HackThisSite
+5. Google Gruyere
+6. Damn Vulnerable iOS App - DVIA
+7. Hellbound Hackers
+8. OWASP Mutillidae II
+9. HackThis!!
+
+
+HOW PROPERLY PROTECT YOUR GAMBLING WEBSITE: use NAT and PAT
+formula: network address translation + port address translation.
+private:insideLocal       public:outsideGlobal
+
+show tcp brief
+in cmd
+netstat -n -p tcp | findstr 8443
+
+
+TASK6: WHAT CAREER IS FOR YOU:
+switching, routing: eigrp,ospf,bgp = network engineer/analyst: 23-32k
+fw, vpn, hacking, cybersec, incident management, IR = SOC analyst, SOC engineer: 30k - 60k
+fortinet,
+
+**SEARCH ABOUT DOCKER**
+
+ctrl + shift + 6 bitaw + X
+to escape from 
+
+TASK 7: WHAT ARE DOCKER CONTAINERIZATION:
+WHAT OS IS BEST TO USE: LINUX apps. = windows WSL2 best for linux apps, its because of docker containerization. 
+
+control panel> programs and features> windows features> install wsl2 on win 11(search on google)
+
+
