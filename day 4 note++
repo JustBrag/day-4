@@ -1,0 +1,104 @@
+config t
+NO ip access-list standard NOPORN
+ip access-list standard NOPORN
+DENY 66.254.0.0 0.0.255.255
+deny 161.49.0.0 0.0.255.255
+DENY 104.21.0.0 0.0.255.255
+DENY 68.235.0.0 0.0.255.255
+DENY 104.17.0.0 0.0.255.255
+DENY 88.208.0.0 0.0.255.255
+DENY 208.77.0.0 0.0.255.255
+DENY 172.67.0.0 0.0.255.255
+Permit Any
+Int Gi 1
+ ip access-group NOPORN in
+end
+
+config t
+NO ip access-list standard NOISKUL
+ip access-list standard NOISKUL 
+DENY   172.67.14.0   0.0.0.255
+DENY   104.22.36.0   0.0.0.255
+DENY   50.6.160.0   0.0.0.255
+DENY   184.168.125.0   0.0.0.255
+DENY   155.137.92.0   0.0.0.255
+Permit Any
+Int Gi 1
+ ip access-group NOISKUL in
+end
+
+
+#2026100471000024 
+
+CREATING YOUR FIRST PACKET FILTER FIREWALL:
+FERRARI/LAMBO VS TOYOTA VIOS VS EBIKE:NWOW
+
+
+conf t
+no ip access-list extended FW2
+ip access-list extended FW2
+permit tcp any host bet10.com eq 22
+permit tcp any host bet10.com eq 23
+permit tcp any host bet10.com eq 443
+permit icmp any host bet10.com
+permit tcp any host bet11.ph eq 80
+permit tcp any host bet11.ph eq 443
+permit tcp any host bet11.ph eq 5060
+permit tcp any host bet11.ph eq 1720
+permit tcp any host bet11.ph eq 2000
+
+int gi 3
+ip access-group FW2 in 
+dh sh ip access-group FW2
+
+EX2. FIREWALL POLICY 2
+
+CREATING A NEW BETTING GAME (BETLOG.COM) 
+
+
+config t
+no access-list 8
+access-list 8 permit host 192.168.103.10
+access-list 8 permit host 192.168.103.11
+ip host betlog.com 208.8.8.69
+Int Gi 3
+ ip nat Inside
+Int gi 1
+ ip nat Outside
+IP Nat inside source static tcp 192.168.103.10 80 208.8.8.69 80
+IP Nat inside source static tcp 192.168.103.10 443 208.8.8.69 443
+IP Nat inside source static tcp 192.168.103.11 80 208.8.8.69 8080
+IP Nat inside source static tcp 192.168.103.11 443 208.8.8.69 8443
+IP nat inside source list 8 int gi 1 Overload
+end
+show ip nat translation
+
+
+TASK 8: PYHTON AUTOMATION IN CISCO
+
+
+import cli
+var1 = '''hostname NETDEVOPS
+int loop 4
+ip add 4.4.4.4 255.255.255.255
+int loop 5
+ip add 5.5.5.5 255.255.255.255
+int loop 6
+ip add 6.6.6.6 255.255.255.255
+end
+'''
+cli.configurep(var1)
+
+
+DHCP SERVER via PYTHON
+
+import cli
+cmd3 = '''
+    ip dhcp pool MINILINUX
+    network 192.168.102.0 255.255.255.0
+    default-router 192.168.102.11
+    domain-name MINILINUX.COM
+    dns-server 8.8.8.8
+    END
+'''
+cli.configurep(cmd3)
